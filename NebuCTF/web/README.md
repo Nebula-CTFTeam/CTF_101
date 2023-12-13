@@ -191,7 +191,7 @@ def register():
 
 将数据和上面获得的签名提交，即可获得 Flag：
 
-<img src="file:///C:/Users/Crabtux/AppData/Roaming/marktext/images/2023-12-13-23-33-46-image.png" title="" alt="" width="512">
+<img src="./imgs/2023-12-13-23-33-46-image.png" title="" alt="" width="512">
 
 ### 解法二：使用 sha256 长度扩展攻击
 
