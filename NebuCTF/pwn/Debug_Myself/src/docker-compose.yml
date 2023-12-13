@@ -1,0 +1,17 @@
+version: "3"
+services:
+  service:
+    restart: always
+    build: .
+    ports:
+      - 31337
+    cpus: 4
+    mem_limit: 4g
+    pids_limit: 256
+    networks:
+      - net
+
+networks:
+  net:
+    external:
+      name: bitnsc_frp_containers

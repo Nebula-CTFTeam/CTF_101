@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEBU FORMU</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .stars {
+        width: 100%;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+        position: absolute;
+      }
+
+      .star {
+        width: 2px;
+        height: 2px;
+        background: white;
+        position: absolute;
+        border-radius: 50%;
+        animation: twinkle 2s infinite ease-in-out;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .nebula {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(270deg, #ff5f6d, #ffc371, #9be15d, #00e3ae);
+        background-size: 800% 800%;
+        animation: Gradient 15s ease infinite;
+        position: absolute;
+        opacity: 0.7;
+      }
+
+      @keyframes Gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .cloud {
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.8);
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        animation: float 20s linear infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-30px) translateX(50px);
+        }
+      }
+
+      .nebula-core {
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0)
+        );
+        border-radius: 50%;
+        animation: pulse 2s infinite ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+
+      .text-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        font-size: 2em;
+        z-index: 10; /* Ensure text is above the background */
+      }
+
+      .dynamic-title {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        font-size: 2em;
+        z-index: 10; /* Ensure text is above the background */
+      }
+
+      .message-board-container {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 60%; /* Reduced width */
+        max-width: 500px; /* Smaller max width */
+        background: rgba(0, 0, 0, 0.8);
+        padding: 15px;
+        border-radius: 10px;
+        color: white;
+        z-index: 20; /* Above the background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .message-board-container h2 {
+        color: #fff;
+        font-size: 1.5em; /* Smaller heading */
+      }
+
+      #messages {
+        margin-top: 15px;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+        max-height: 150px; /* Limiting the message display area */
+        overflow-y: auto; /* Scroll for overflow */
+      }
+
+      .message {
+        background-color: #f9f9f9;
+        color: black;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        font-size: 0.9em; /* Smaller text for messages */
+      }
+
+      textarea {
+        width: calc(100% - 20px);
+        font-size: 0.9em; /* Smaller font size for textarea */
+      }
+
+      button {
+        margin-top: 10px;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nebula">
+      <div class="nebula-core"></div>
+      <div class="stars">
+        <div
+          class="star"
+          style="top: 10%; left: 20%; animation-duration: 2.5s"
+        ></div>
+        <div
+          class="star"
+          style="top: 30%; left: 50%; animation-duration: 2s"
+        ></div>
+        <div
+          class="star"
+          style="top: 70%; left: 80%; animation-duration: 1.5s"
+        ></div>
+        <div
+          class="star"
+          style="top: 36%; left: 17%; animation-duration: 4.5s"
+        ></div>
+        <div
+          class="star"
+          style="top: 50%; left: 34%; animation-duration: 2.5s"
+        ></div>
+        <div
+          class="star"
+          style="top: 44%; left: 60%; animation-duration: 1.5s"
+        ></div>
+      </div>
+      <div
+        class="cloud"
+        style="
+          top: 20%;
+          left: 30%;
+          animation-duration: 22s;
+          animation-delay: -5s;
+        "
+      ></div>
+      <div
+        class="cloud"
+        style="
+          top: 50%;
+          left: 60%;
+          animation-duration: 18s;
+          animation-delay: -3s;
+        "
+      ></div>
+      <div class="dynamic-title" id="dynamic-title">Welcome to NebuCTF</div>
+
+      <div class="message-board-container">
+        <form id="messageForm">
+          <label for="messageInput">Your Message:</label><br />
+          <textarea id="messageInput" rows="3" cols="50"></textarea><br />
+          <button type="submit">Post Message</button>
+        </form>
+        <div id="messages"></div>
+      </div>
+    </div>
+
+    <script>
+      const titles = [
+        "Welcome to NebuCTF",
+        "Nebu Formu",
+        "There're still a few bugs though.",
+        "Cool Nebu Formu",
+      ];
+      let currentIndex = 0;
+
+      function changeTitle() {
+        currentIndex = (currentIndex + 1) % titles.length;
+        document.getElementById("dynamic-title").textContent =
+          titles[currentIndex];
+      }
+
+      setInterval(changeTitle, 1500);
+
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const message = params.get("name");
+        if (message) {
+          displayMessage(message);
+        }
+      };
+
+      function displayMessage(message) {
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+        messageDiv.textContent = message;
+        document.getElementById("messages").appendChild(messageDiv);
+      }
+
+      document
+        .getElementById("messageForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const messageInput = document.getElementById("messageInput");
+          const message = messageInput.value.trim();
+
+          if (message) {
+            window.location.href = `./index.html?name=${encodeURIComponent(
+              message,
+            )}`;
+          }
+        });
+    </script>
+  </body>
+</html>

